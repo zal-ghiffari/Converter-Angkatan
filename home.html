@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Converter AK - ST - PT</title>
+    <style>
+		@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap');
+		* {
+		  margin: 0;
+		  padding: 0;
+		  box-sizing: border-box;
+		  font-family: 'Roboto Mono';
+		  font-size: 18px;
+		}
+
+		body {
+		  height: 100vh;
+		  background-color: #5e8b7e;
+		  display: flex;
+		  align-items: center;
+		  justify-content: center;
+		}
+
+		.container {
+		  width: 750px;
+		  background-color: #fff;
+		  padding: 70px 40px;
+		  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.25);
+		  border-radius: 8px;
+		  display: flex;
+		  justify-content: space-between;
+		}
+
+		.cf {
+		  width: 75%;
+		  margin: 8px;
+		  padding: 4px;
+		}
+
+		input {
+		  width: 100%;
+		  height: 50px;
+		  border-radius: 5px;
+		  border: 2px solid #d2d2d2;
+		  outline: none;
+		  margin-top: 8px;
+		  padding: 0 10px;
+		}
+
+		input:focus {
+		  border-color: #5e8b7e;
+		}
+	</style>
+  </head>
+  <body>
+    <div class="container">
+	  <div class="cf">
+		<h1><b>Converter<b> <br> AK - ST - PT <br><br><br><br><br><br>Donasi:<br><br>
+			<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="zazalghiffari" data-color="#FFDD00" data-emoji=""  data-font="Poppins" data-text="Beli kopi yuk" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+		</h1>
+      </div>
+      <div class="cf">
+		<label for="aksara">AK (Aksara)</label>
+		<input type="number" id="aksara">
+      </div>
+      <div class="cf">
+		<label for="stsn">ST (STSN)</label>
+		<input type="number" id="stsn">
+      </div>
+	  <div class="cf">
+		<label for="pssn">PT (PSSN)</label>
+		<input type="number" id="pssn">
+      </div>
+    </div>
+    <script>
+		let stsn = document.getElementById('stsn');
+		let aksara = document.getElementById('aksara');
+		let pssn = document.getElementById('pssn');
+		stsn.oninput = function () {
+			
+			let f = (parseInt(stsn.value) + 28);
+			aksara.value = parseInt(f);
+			
+			if(stsn.value >= 15) {
+				let k = ((stsn.value - 15) + 1);
+				pssn.value = k;
+			} else if (stsn.value < 15) {
+				let k = (stsn.value - 15);
+				pssn.value = k;
+			}
+			
+		}
+		aksara.oninput = function () {
+			if(aksara.value <= 28) {
+				let c = (aksara.value - 29);
+				stsn.value = c;
+				let k = (aksara.value - 44);
+				pssn.value = k;
+			} else if (aksara.value > 28) {
+				let c = (aksara.value - 28);
+				stsn.value = c;
+				let k = ((aksara.value - 28) - 15);
+				pssn.value = k;
+			} else if (aksara.value >= 43) {
+				let c = (aksara.value - 28);
+				stsn.value = c;
+				let k = ((aksara.value - 43) + 1);
+				pssn.value = k;
+			}
+		}
+		pssn.oninput = function () {
+			let f = (parseInt(pssn.value) + 42);
+			aksara.value = parseInt(f);
+
+			let c = (parseInt(pssn.value) + 14);
+			stsn.value = parseInt(c);
+		}
+	</script>
+  </body>
+</html>
